@@ -1,9 +1,3 @@
-function getProductList(){
-    fetch('http://localhost:8080/api/product/list')
-    .then(response => response.json())
-    .then(data => CreateTableFromJSON(data));
-}
-
 function CreateTableFromJSON(data){
     
     
@@ -39,5 +33,23 @@ function CreateTableFromJSON(data){
     let divContainer = document.getElementById("showData");
     divContainer.innerHTML = "";
     divContainer.appendChild(table);
+}
+
+function getProductList(){
+    fetch('http://localhost:8080/api/product/list')
+    .then(response => response.json())
+    .then(data => CreateTableFromJSON(data));
+}
+
+function getProducCategory(id){
+    fetch('http://localhost:8080/api/product/showProductCategory/'+id)
+    .then(response => response.json())
+    .then(data => CreateTableFromJSON(data));
+}
+
+function getProducName(name){
+    fetch('http://localhost:8080/api/product/findByTitleContaining/'+name)
+    .then(response => response.json())
+    .then(data => CreateTableFromJSON(data));
 }
 
