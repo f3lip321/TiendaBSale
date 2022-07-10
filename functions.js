@@ -1,7 +1,7 @@
 const buscar = document.getElementsByName('buscar')[0];    
 
 function getProducCategory(id){
-    fetch('http://localhost:8080/api/product/showProductCategory/'+id)
+    fetch('https://desafio-tienda.herokuapp.com/api/product/showProductCategory/'+id)
     .then(response => response.json())    
     .then(data => CreateCardProductsFromJSON(data));    
 }
@@ -32,7 +32,7 @@ function CreateCardProductsFromJSON(data){
 }
 
 function getProducName(){    
-    fetch('http://localhost:8080/api/product/findByTitleContaining/'+buscar.value.trim())
+    fetch('https://desafio-tienda.herokuapp.com/api/product/findByTitleContaining/'+buscar.value.trim())
     .then(response => response.json())
     .then(data => CreateCardProductsFromJSON(data));
 }

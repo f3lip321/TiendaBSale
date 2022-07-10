@@ -15,7 +15,7 @@
 
   <script type="text/javascript">
     function getProducts() {
-      fetch('http://localhost:8080/api/product/list')
+      fetch('https://desafio-tienda.herokuapp.com/api/product/list')
         .then(response => response.json())
         .then(data => CreateCardProductsFromJSON(data));
     }
