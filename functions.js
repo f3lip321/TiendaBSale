@@ -1,55 +1,44 @@
-function CreateTableFromJSON(data){
-    
-    
-    let col = [];
-    for (let i = 0; i < data.length; i++) {
-        for (let key in data[i]) {
-            if (col.indexOf(key) === -1) {
-                col.push(key);
-            }
-        }
-        
-    }
-
-    let table = document.createElement("table");
-
-    let tr = table.insertRow(-1);
-
-    for (let i = 0; i < col.length; i++) {
-        let th = document.createElement("th");
-        th.innerHTML = col[i];
-        tr.appendChild(th);        
-    }
-
-    for (let i = 0; i < data.length; i++) {
-        tr = table.insertRow(-1);
-
-        for (let j = 0; j < col.length; j++) {
-            let tabCell = tr.insertCell(-1);
-            tabCell.innerHTML = data[i][col[j]];
-        }        
-    }
-
-    let divContainer = document.getElementById("showData");
-    divContainer.innerHTML = "";
-    divContainer.appendChild(table);
-}
-
-function getProductList(){
-    fetch('http://localhost:8080/api/product/list')
-    .then(response => response.json())
-    .then(data => CreateTableFromJSON(data));
-}
+const buscar = document.getElementsByName('buscar')[0];
+    console.log(buscar);
 
 function getProducCategory(id){
     fetch('http://localhost:8080/api/product/showProductCategory/'+id)
-    .then(response => response.json())
-    .then(data => CreateTableFromJSON(data));
+    .then(response => response.json())    
+    .then(data => CreateCardProductsFromJSON(data));    
 }
 
-function getProducName(name){
-    fetch('http://localhost:8080/api/product/findByTitleContaining/'+name)
-    .then(response => response.json())
-    .then(data => CreateTableFromJSON(data));
+function CreateCardProductsFromJSON(data){
+    let htmlCode = ``;
+    
+    data.forEach(function(singleProductObjects) {
+    
+    htmlCode =
+      htmlCode +
+      `
+  <div class="col">
+    <div class="card">
+      <img src="${singleProductObjects.url_image}"  alt="...">
+      <div class="card-body">
+        <h5 class="card-title">${singleProductObjects.name}</h5>
+        <p class="card-text">$${singleProductObjects.price}</p>
+      </div>
+    </div>
+  </div>    
+    `;    
+  });
+  
+  const productCards = document.querySelector(".all-product-cards");
+  
+  productCards.innerHTML = htmlCode;
 }
 
+
+function getProducName(){    
+    fetch('http://localhost:8080/api/product/findByTitleContaining/'+buscar.value.trim())
+    .then(response => response.json())
+    .then(data => CreateCardProductsFromJSON(data));
+}
+
+
+
+  
