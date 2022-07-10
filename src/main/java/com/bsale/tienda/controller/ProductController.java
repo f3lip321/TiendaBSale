@@ -32,14 +32,14 @@ public class ProductController {
     @GetMapping(value = "/findByTitleContaining/{name}")
     public ResponseEntity findProductsNameEndsWith(@PathVariable String name) {
 
-        var products = (List<Product>) service.findByTitleContaining(name);
+        List<Product> products = service.findByTitleContaining(name);
         return ResponseEntity.status(HttpStatus.OK).body(products);
     }
 
     @GetMapping(value = "/showProductCategory/{id}")
     public ResponseEntity findByProductCategory(@PathVariable int id) {
 
-        var products = (List<Product>) service.findByProductCategory(id);
+        List<Product> products = service.findByProductCategory(id);
         return ResponseEntity.status(HttpStatus.OK).body(products);
     }
 }

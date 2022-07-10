@@ -25,12 +25,12 @@ public class ProductService {
     }
 
     public List<Product> findByTitleContaining(String name){
-        var products = (List<Product>) repo.findByTitleContaining(name);
+        List<Product> products = repo.findByTitleContaining(name);
         return products;
     }
 
     public List<Product> findByProductCategory(int id){
-        var productsCategory = (List<Product>) repo.findByProductCategory(id);
+        List<Product> productsCategory = repo.findByProductCategory(id);
         return productsCategory;
     }
 
