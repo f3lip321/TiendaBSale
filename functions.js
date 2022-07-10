@@ -1,5 +1,4 @@
-const buscar = document.getElementsByName('buscar')[0];
-    console.log(buscar);
+const buscar = document.getElementsByName('buscar')[0];    
 
 function getProducCategory(id){
     fetch('http://localhost:8080/api/product/showProductCategory/'+id)
@@ -9,9 +8,9 @@ function getProducCategory(id){
 
 function CreateCardProductsFromJSON(data){
     let htmlCode = ``;
-    
-    data.forEach(function(singleProductObjects) {
-    
+        
+    data.forEach(function(singleProductObjects) {            
+
     htmlCode =
       htmlCode +
       `
@@ -32,13 +31,8 @@ function CreateCardProductsFromJSON(data){
   productCards.innerHTML = htmlCode;
 }
 
-
 function getProducName(){    
     fetch('http://localhost:8080/api/product/findByTitleContaining/'+buscar.value.trim())
     .then(response => response.json())
     .then(data => CreateCardProductsFromJSON(data));
 }
-
-
-
-  
